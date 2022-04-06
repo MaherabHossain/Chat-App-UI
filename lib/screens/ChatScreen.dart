@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/ChatDetail.dart';
 import 'package:chat_app/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/models/chatUsersModel.dart';
@@ -79,9 +80,7 @@ class ChatScreen extends StatelessWidget {
                           color: Colors.pink.shade400,
                         ),
                         child: GestureDetector(
-                          onTap: () {
-                            print('tapped d');
-                          },
+                          onTap: () {},
                           child: Row(
                             children: [
                               Icon(
@@ -141,12 +140,23 @@ class ChatScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return ConversationList(
-                    chatUsers[index].name,
-                    chatUsers[index].messageTxt,
-                    chatUsers[index].imageUrl,
-                    chatUsers[index].time,
-                    (index == 0 || index == 3) ? true : false,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatDetail(),
+                          settings: RouteSettings(arguments: chatUsers[index]),
+                        ),
+                      );
+                    },
+                    child: ConversationList(
+                      chatUsers[index].name,
+                      chatUsers[index].messageTxt,
+                      chatUsers[index].imageUrl,
+                      chatUsers[index].time,
+                      (index == 0 || index == 3) ? true : false,
+                    ),
                   );
                 },
                 itemCount: chatUsers.length,
