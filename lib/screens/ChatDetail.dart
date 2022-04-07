@@ -23,6 +23,8 @@ class ChatDetail extends StatelessWidget {
       ChatMessage("ehhhh, doing OK.", "receiver"),
       ChatMessage("Is there any thing wrong?", "sender"),
     ];
+    messages = messages.reversed.toList();
+    // messages = messages.toList();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -110,6 +112,7 @@ class ChatDetail extends StatelessWidget {
                   ),
                 );
               },
+              reverse: true,
               itemCount: messages.length,
             ),
             Align(
